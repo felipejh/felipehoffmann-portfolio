@@ -6,7 +6,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     tagline: z.string(),
-    platforms: z.array(z.string()),
+    platforms: z.array(z.object({ label: z.string(), url: z.string().url().optional() })),
     timeframe: z.string(),
     status: z.string(),
     role: z.string(),

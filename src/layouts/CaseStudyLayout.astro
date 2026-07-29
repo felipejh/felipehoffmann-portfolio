@@ -6,7 +6,7 @@ import ScreensGallery from '../components/case-study/ScreensGallery.astro';
 interface Props {
   title: string;
   tagline: string;
-  platforms: string[];
+  platforms: { label: string; url?: string }[];
   timeframe: string;
   status: string;
   role: string;
@@ -29,11 +29,23 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
       <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>
       <div class="flex flex-wrap gap-2">
         {
-          platforms.map((p) => (
-            <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
-              {p}
-            </span>
-          ))
+          platforms.map((p) =>
+            p.url ? (
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noreferrer"
+                class="rounded-full px-2.5 py-1 text-xs font-semibold underline-offset-2 hover:underline"
+                style="background: var(--accent); color: #05070c;"
+              >
+                {p.label} ↗
+              </a>
+            ) : (
+              <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
+                {p.label}
+              </span>
+            ),
+          )
         }
         <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
           {timeframe}

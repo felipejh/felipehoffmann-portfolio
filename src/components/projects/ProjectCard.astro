@@ -3,7 +3,7 @@ interface Props {
   slug: string;
   title: string;
   tagline: string;
-  platforms: string[];
+  platforms: { label: string; url?: string }[];
   stackTop: string[];
 }
 
@@ -15,7 +15,7 @@ const { slug, title, tagline, platforms, stackTop } = Astro.props;
     {
       platforms.map((p) => (
         <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
-          {p}
+          {p.label}
         </span>
       ))
     }

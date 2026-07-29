@@ -29,8 +29,16 @@ import { experience, education } from '../../data/experience';
         </div>
       ))
     }
-    <p class="pl-1 text-sm" style="color: var(--text-muted);">
-      {education.degree} — {education.school} ({education.dates})
-    </p>
+  </div>
+
+  <div class="mt-10">
+    <h3 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Education</h3>
+    <div class="card flex flex-wrap items-baseline justify-between gap-2 p-5">
+      <div>
+        <p class="text-sm font-semibold" style="font-family: inherit; color: var(--text);">{education.degree}</p>
+        <p class="text-sm" style="color: var(--text-muted);">{education.school}</p>
+      </div>
+      <span class="text-xs font-mono" style="color: var(--accent);">{education.dates}</span>
+    </div>
   </div>
 </section>

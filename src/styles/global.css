@@ -73,14 +73,28 @@ a {
 
 .container {
   max-width: 72rem;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
 }
 
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
+}
+
+.section-divider {
+  border-top: 1px solid var(--border);
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
 .fade-in {

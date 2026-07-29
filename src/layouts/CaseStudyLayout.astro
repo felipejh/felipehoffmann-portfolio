@@ -24,7 +24,7 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
 ---
 
 <BaseLayout title={`${title} — Case Study`} description={tagline}>
-  <article class="container flex flex-col gap-14 py-16">
+  <article class="container flex flex-col gap-16 py-16 sm:py-24">
     <header class="flex flex-col gap-4">
       <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>
       <div class="flex flex-wrap gap-2">
@@ -48,36 +48,34 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
 
     <section class="grid gap-8 sm:grid-cols-3">
       <div class="sm:col-span-2">
-        <h2 class="mb-2 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Problem</h2>
+        <h2 class="eyebrow">Problem</h2>
         <p class="leading-relaxed" style="color: var(--text);">{problem}</p>
       </div>
       <div>
-        <h2 class="mb-2 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Role</h2>
+        <h2 class="eyebrow">Role</h2>
         <p class="leading-relaxed" style="color: var(--text);">{role}</p>
       </div>
     </section>
 
     <section>
-      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Tech Stack</h2>
+      <h2 class="eyebrow">Tech Stack</h2>
       <TechStackBadges stack={stack} />
     </section>
 
     <section>
-      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">
-        Architecture &amp; Engineering Highlights
-      </h2>
+      <h2 class="eyebrow">Architecture &amp; Engineering Highlights</h2>
       <div class="prose-case-study grid gap-4 sm:grid-cols-2">
         <slot />
       </div>
     </section>
 
     <section>
-      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Screens</h2>
+      <h2 class="eyebrow">Screens</h2>
       <ScreensGallery screens={screens} />
     </section>
 
     <section>
-      <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Impact / Status</h2>
+      <h2 class="eyebrow">Impact / Status</h2>
       <ul class="flex flex-col gap-1.5 pl-4 text-sm leading-relaxed" style="color: var(--text-muted); list-style: disc;">
         {impact.map((line) => <li>{line}</li>)}
       </ul>

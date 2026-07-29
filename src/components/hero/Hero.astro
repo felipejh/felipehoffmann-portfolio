@@ -1,0 +1,43 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section class="container flex flex-col gap-6 py-24 sm:py-32">
+  <p class="fade-in text-sm font-mono" style="color: var(--accent);">
+    {profile.location} · {profile.timezone}
+  </p>
+  <h1 class="fade-in text-4xl font-bold sm:text-6xl" style="color: var(--text);">
+    {profile.name}
+  </h1>
+  <h2 class="fade-in text-xl font-normal sm:text-2xl" style="color: var(--text-muted); font-family: inherit;">
+    {profile.title}
+  </h2>
+  <p class="fade-in max-w-2xl text-base leading-relaxed sm:text-lg" style="color: var(--text-muted);">
+    {profile.tagline}
+  </p>
+  <div class="fade-in flex flex-wrap gap-3 pt-2">
+    <a
+      href={profile.resumeUrl}
+      class="rounded-full px-5 py-2.5 text-sm font-medium"
+      style="background: var(--accent); color: #05070c;"
+    >
+      View Resume
+    </a>
+    <a
+      href={profile.linkedin}
+      target="_blank"
+      rel="noreferrer"
+      class="rounded-full border px-5 py-2.5 text-sm font-medium"
+      style="border-color: var(--border); color: var(--text);"
+    >
+      LinkedIn
+    </a>
+    <a
+      href={`mailto:${profile.email}`}
+      class="rounded-full border px-5 py-2.5 text-sm font-medium"
+      style="border-color: var(--border); color: var(--text);"
+    >
+      Email
+    </a>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<header
+  class="sticky top-0 z-50 border-b backdrop-blur"
+  style="background: color-mix(in srgb, var(--bg) 85%, transparent); border-color: var(--border);"
+>
+  <nav class="container flex items-center justify-between py-4">
+    <a href="/" class="text-sm font-semibold tracking-tight" style="color: var(--text);">
+      {profile.name}
+    </a>
+    <div class="flex items-center gap-5 text-sm" style="color: var(--text-muted);">
+      <a href="/#projects" class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Projects</a>
+      <a href="/#experience" class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Experience</a>
+      <a href={profile.resumeUrl} class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Resume</a>
+      <a href={`mailto:${profile.email}`} class="hover:opacity-100" style="opacity: 0.85;">Contact</a>
+      <button
+        data-theme-toggle
+        aria-label="Toggle theme"
+        class="grid h-8 w-8 place-items-center rounded-full border text-xs"
+        style="border-color: var(--border); color: var(--text-muted);"
+      >
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </nav>
+</header>

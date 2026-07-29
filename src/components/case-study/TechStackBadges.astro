@@ -1,0 +1,35 @@
+---
+interface Props {
+  stack: {
+    frontend: string[];
+    backend: string[];
+    infra: string[];
+  };
+}
+
+const { stack } = Astro.props;
+const groups = [
+  { label: 'Frontend / Mobile', items: stack.frontend },
+  { label: 'Backend / Data', items: stack.backend },
+  { label: 'Infra / CI', items: stack.infra },
+].filter((g) => g.items.length > 0);
+---
+
+<div class="grid gap-4 sm:grid-cols-3">
+  {
+    groups.map((group) => (
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase tracking-wide" style="color: var(--text-muted);">
+          {group.label}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {group.items.map((item) => (
+            <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text);">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>

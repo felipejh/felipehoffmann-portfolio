@@ -1,0 +1,59 @@
+---
+interface Screen {
+  label: string;
+  image?: string;
+  kind: 'mobile' | 'web';
+}
+
+interface Props {
+  screens: Screen[];
+}
+
+const { screens } = Astro.props;
+---
+
+<div class="flex snap-x gap-5 overflow-x-auto pb-4">
+  {
+    screens.map((screen) =>
+      screen.kind === 'web' ? (
+        <figure class="snap-start shrink-0 w-[26rem]">
+          <div class="overflow-hidden rounded-lg border shadow-lg" style="border-color: var(--border);">
+            <div class="flex items-center gap-1.5 px-3 py-2" style="background: var(--bg-elevated);">
+              <span class="h-2 w-2 rounded-full" style="background: #ff5f56;" />
+              <span class="h-2 w-2 rounded-full" style="background: #ffbd2e;" />
+              <span class="h-2 w-2 rounded-full" style="background: #27c93f;" />
+            </div>
+            {screen.image ? (
+              <img src={screen.image} alt={screen.label} class="w-full" loading="lazy" />
+            ) : (
+              <div class="grid h-56 place-items-center text-xs" style="color: var(--text-muted); background: var(--bg-card);">
+                {screen.label}
+              </div>
+            )}
+          </div>
+          <figcaption class="mt-2 text-center text-xs" style="color: var(--text-muted);">
+            {screen.label}
+          </figcaption>
+        </figure>
+      ) : (
+        <figure class="snap-start shrink-0 w-[13rem]">
+          <div
+            class="overflow-hidden rounded-[1.75rem] border-4 shadow-lg"
+            style="border-color: #2a2f3a; background: #000;"
+          >
+            {screen.image ? (
+              <img src={screen.image} alt={screen.label} class="w-full" loading="lazy" />
+            ) : (
+              <div class="grid aspect-[9/19.5] place-items-center px-3 text-center text-xs" style="color: var(--text-muted); background: var(--bg-card);">
+                {screen.label}
+              </div>
+            )}
+          </div>
+          <figcaption class="mt-2 text-center text-xs" style="color: var(--text-muted);">
+            {screen.label}
+          </figcaption>
+        </figure>
+      ),
+    )
+  }
+</div>

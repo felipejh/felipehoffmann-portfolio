@@ -1,0 +1,88 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TechStackBadges from '../components/case-study/TechStackBadges.astro';
+import ScreensGallery from '../components/case-study/ScreensGallery.astro';
+
+interface Props {
+  title: string;
+  tagline: string;
+  platforms: string[];
+  timeframe: string;
+  status: string;
+  role: string;
+  problem: string;
+  impact: string[];
+  stack: {
+    frontend: string[];
+    backend: string[];
+    infra: string[];
+  };
+  screens: { label: string; image?: string; kind: 'mobile' | 'web' }[];
+}
+
+const { title, tagline, platforms, timeframe, status, role, problem, impact, stack, screens } = Astro.props;
+---
+
+<BaseLayout title={`${title} — Case Study`} description={tagline}>
+  <article class="container flex flex-col gap-14 py-16">
+    <header class="flex flex-col gap-4">
+      <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>
+      <div class="flex flex-wrap gap-2">
+        {
+          platforms.map((p) => (
+            <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
+              {p}
+            </span>
+          ))
+        }
+        <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
+          {timeframe}
+        </span>
+        <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
+          Solo project · built with an AI-assisted workflow
+        </span>
+      </div>
+      <h1 class="text-3xl font-bold sm:text-5xl" style="color: var(--text);">{title}</h1>
+      <p class="max-w-2xl text-lg" style="color: var(--text-muted);">{tagline}</p>
+    </header>
+
+    <section class="grid gap-8 sm:grid-cols-3">
+      <div class="sm:col-span-2">
+        <h2 class="mb-2 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Problem</h2>
+        <p class="leading-relaxed" style="color: var(--text);">{problem}</p>
+      </div>
+      <div>
+        <h2 class="mb-2 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Role</h2>
+        <p class="leading-relaxed" style="color: var(--text);">{role}</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Tech Stack</h2>
+      <TechStackBadges stack={stack} />
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">
+        Architecture &amp; Engineering Highlights
+      </h2>
+      <div class="prose-case-study grid gap-4 sm:grid-cols-2">
+        <slot />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Screens</h2>
+      <ScreensGallery screens={screens} />
+    </section>
+
+    <section>
+      <h2 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Impact / Status</h2>
+      <ul class="flex flex-col gap-1.5 pl-4 text-sm leading-relaxed" style="color: var(--text-muted); list-style: disc;">
+        {impact.map((line) => <li>{line}</li>)}
+      </ul>
+    </section>
+
+    <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>
+  </article>
+</BaseLayout>

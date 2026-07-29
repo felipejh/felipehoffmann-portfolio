@@ -1,0 +1,39 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  tagline: string;
+  platforms: string[];
+  stackTop: string[];
+}
+
+const { slug, title, tagline, platforms, stackTop } = Astro.props;
+---
+
+<a href={`/projects/${slug}`} class="card fade-in flex flex-col gap-4 p-6 transition-transform hover:-translate-y-1">
+  <div class="flex flex-wrap gap-2">
+    {
+      platforms.map((p) => (
+        <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
+          {p}
+        </span>
+      ))
+    }
+  </div>
+  <h3 class="text-xl font-semibold" style="font-family: inherit; color: var(--text);">
+    {title}
+  </h3>
+  <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
+    {tagline}
+  </p>
+  <div class="flex flex-wrap gap-2 pt-1">
+    {
+      stackTop.map((s) => (
+        <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
+          {s}
+        </span>
+      ))
+    }
+  </div>
+  <span class="mt-auto pt-2 text-sm font-medium" style="color: var(--accent);">View full case study →</span>
+</a>

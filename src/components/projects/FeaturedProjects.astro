@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="container fade-in py-12">
+  <h2 class="mb-6 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">
+    Featured Projects
+  </h2>
+  <div class="grid gap-5 sm:grid-cols-2">
+    {
+      projects.map((project) => (
+        <ProjectCard
+          slug={project.id}
+          title={project.data.title}
+          tagline={project.data.tagline}
+          platforms={project.data.platforms}
+          stackTop={[
+            ...project.data.stack.frontend.slice(0, 2),
+            ...project.data.stack.backend.slice(0, 1),
+          ]}
+        />
+      ))
+    }
+  </div>
+</section>

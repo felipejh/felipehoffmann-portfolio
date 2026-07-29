@@ -1,0 +1,24 @@
+---
+import { otherWork } from '../../data/other-work';
+---
+
+<section class="container fade-in py-12">
+  <h2 class="mb-6 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Other Work</h2>
+  <div class="grid gap-4 sm:grid-cols-2">
+    {
+      otherWork.map((item) => (
+        <div class="rounded-lg border p-4" style="border-color: var(--border);">
+          <div class="mb-1 flex items-baseline justify-between gap-2">
+            <h3 class="text-sm font-semibold" style="font-family: inherit; color: var(--text);">
+              {item.name}
+            </h3>
+            <span class="text-xs" style="color: var(--text-muted);">
+              {item.platforms}
+            </span>
+          </div>
+          <p class="text-sm" style="color: var(--text-muted);">{item.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

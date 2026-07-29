@@ -1,0 +1,102 @@
+---
+title: 'Central Condo'
+tagline: 'A full-stack, multi-tenant condominium management platform: REST API, admin web panel, resident mobile app, and a real pilot-client landing page.'
+platforms: ['Google Play', 'App Store (TestFlight)', 'Web']
+timeframe: '2026 (built in ~1 month, 55 commits)'
+status: 'In active production use with a real pilot condo; Android live, iOS in App Store review'
+role: 'Solo full-stack engineer — API, admin panel, mobile app, and infrastructure, end to end.'
+problem: 'Condominiums coordinate residents, packages, announcements, and maintenance requests over WhatsApp groups and paper logs at the front desk — no shared source of truth for managers or residents, and no way to serve more than one building from the same system.'
+impact:
+  - 'In active production use with Altos do Moinho, a real pilot condo, at altosdomoinho.com.br.'
+  - 'Mobile app already past App Store/Play submission — Android live, iOS on TestFlight.'
+  - 'Same API and mobile app serve multiple condominiums from a single codebase.'
+  - 'CI runs real integration tests against a live Postgres container on every server change.'
+stack:
+  frontend:
+    ['Expo SDK 56', 'React Native 0.85 / React 19', 'React 18 + React Admin (web)', 'Vite', 'MUI 5']
+  backend: ['Node 22 + Fastify 4', 'Knex + PostgreSQL', 'JWT + bcrypt', 'zod']
+  infra: ['Docker', 'GitHub Actions (Postgres service container)', 'EAS Build/Submit + OTA Updates']
+screens:
+  - label: 'Mobile sign in'
+    image: '/images/screens/central-condo/mobile-sign-in.png'
+  - label: 'Admin home'
+    image: '/images/screens/central-condo/mobile-admin-home.png'
+  - label: 'Admin area'
+    image: '/images/screens/central-condo/mobile-admin-area.png'
+  - label: 'Send announcement'
+    image: '/images/screens/central-condo/mobile-send-announcement.png'
+  - label: 'Residents (mobile)'
+    image: '/images/screens/central-condo/mobile-residents-list.png'
+  - label: 'Register package'
+    image: '/images/screens/central-condo/mobile-register-package.png'
+  - label: 'All packages (admin)'
+    image: '/images/screens/central-condo/mobile-admin-packages-list.png'
+  - label: 'Signature capture'
+    image: '/images/screens/central-condo/mobile-signature-capture.png'
+  - label: 'Package signed off'
+    image: '/images/screens/central-condo/mobile-package-signed.png'
+  - label: 'Resident home'
+    image: '/images/screens/central-condo/mobile-resident-home.png'
+  - label: 'Resident settings'
+    image: '/images/screens/central-condo/mobile-resident-settings.png'
+  - label: 'Web admin — dashboard'
+    image: '/images/screens/central-condo/web-dashboard.png'
+    kind: 'web'
+  - label: 'Web admin — residents'
+    image: '/images/screens/central-condo/web-residents-list.png'
+    kind: 'web'
+  - label: 'Web admin — packages'
+    image: '/images/screens/central-condo/web-packages.png'
+    kind: 'web'
+  - label: 'Web admin — announcements'
+    image: '/images/screens/central-condo/web-announcements.png'
+    kind: 'web'
+  - label: 'Pilot condo landing page'
+    image: '/images/screens/central-condo/landing-altosdomoinho.png'
+    kind: 'web'
+order: 2
+---
+
+import HighlightCard from '../../components/case-study/HighlightCard.astro';
+import CodeSnippet from '../../components/case-study/CodeSnippet.astro';
+
+<HighlightCard title="Multi-tenant architecture from a single codebase">
+A `condoContext` middleware resolves the tenant via an `X-Condo-Slug` header and scopes every query — residents, packages, announcements, store — by `condo_id`. The same API and the same mobile app serve multiple condominiums with no per-tenant deploy.
+</HighlightCard>
+
+<HighlightCard title="Digital signature capture, privacy by design">
+Residents and staff sign for package pickups with a canvas-based signature pad. A scheduled server-side job auto-purges the base64 signature images past a configurable retention window while preserving the audit record — a genuine data-retention feature, not an afterthought.
+</HighlightCard>
+
+<HighlightCard title="Real CI, not just linting">
+GitHub Actions spins up an actual Postgres 15 service container, runs the Knex migrations, and executes the full integration test suite on every change to the server — the same schema and data flow the app depends on in production.
+</HighlightCard>
+
+<HighlightCard title="iOS Keychain / AutoFill credential sharing">
+`associatedDomains` (`webcredentials:centralcondominio.com.br`) lets iOS Keychain autofill save and offer the same login across the web admin panel and the mobile app, gated behind Face ID / Touch ID via the OS autofill layer.
+</HighlightCard>
+
+<HighlightCard title="Full app-store-readiness engineering">
+Account deletion flow, public privacy/support/account-deletion pages, `.well-known` routes, and seeded demo-condo data for App Store reviewers — the full mobile release lifecycle, not just feature code.
+</HighlightCard>
+
+<HighlightCard title="End-to-end push notification pipeline">
+Expo push tokens are registered per device/platform, fanned out server-side via Expo's push API with Android notification channels, and wired into role-based "send announcement" flows in both the web and mobile admin surfaces.
+</HighlightCard>
+
+<HighlightCard title="Pragmatic, idempotent operations">
+Supabase-hosted Postgres for staging and prod, guard-clause migrations safe to re-run across environments that may be partially migrated, a Dockerized API deploy, and EAS OTA updates for shipping JS fixes without an App Store review cycle.
+</HighlightCard>
+
+<CodeSnippet
+  filename="condoContext.ts"
+  lang="typescript"
+  code={`export async function condoContext(request: FastifyRequest, reply: FastifyReply) {
+  const slug = request.headers['x-condo-slug'];
+  const condo = await knex('condos').where({ slug }).first();
+  if (!condo) return reply.status(404).send({ error: 'Unknown condo' });
+
+  // every downstream query is scoped by condo_id — same API, many buildings
+  request.condoId = condo.id;
+}`}
+/>

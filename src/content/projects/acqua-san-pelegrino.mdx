@@ -1,0 +1,87 @@
+---
+title: 'Acqua San Pelegrino'
+tagline: 'A multi-tenant SaaS for swimming academies, replacing paper test tracking with a real-time, ranked, role-gated system.'
+platforms: ['App Store', 'Google Play']
+timeframe: '2026'
+status: 'Live on the App Store, in progress on Google Play'
+role: 'Solo mobile engineer — product, mobile app, database, and AI feature, end to end.'
+problem: 'Swimming academies run a standardized program of four physical tests twice a year ("A3 methodology"), but coaches were tracking results on paper and spreadsheets — no ranking, no history, no way for students to see their own progress.'
+impact:
+  - 'Live on the App Store; Google Play submission in progress.'
+  - 'Multi-tenant from day one — built to be resold to other academies, not a single-customer script.'
+  - 'A ~250-student roster runs through the request/approve/claim onboarding flow.'
+  - 'Students track evolution across two stages a year with charts backed by real seeded data.'
+stack:
+  frontend:
+    ['Expo SDK 56 (New Architecture)', 'Expo Router', 'React Native 0.85', 'TypeScript strict', 'TanStack Query', 'Zustand + MMKV']
+  backend: ['Supabase (Postgres, Auth, RLS)', 'Edge Functions (Deno)', 'Google Gemini']
+  infra: ['EAS Build/Submit/Update', 'patch-package']
+screens:
+  - label: 'Sign in'
+    image: '/images/screens/acqua-san-pelegrino/sign-in.png'
+  - label: 'Coach home'
+    image: '/images/screens/acqua-san-pelegrino/coach-home.png'
+  - label: 'Student home'
+    image: '/images/screens/acqua-san-pelegrino/student-home.png'
+  - label: 'Student evolution'
+    image: '/images/screens/acqua-san-pelegrino/student-evolution.png'
+  - label: 'AI workout feedback'
+    image: '/images/screens/acqua-san-pelegrino/workout-ai-feedback.png'
+  - label: 'Rankings'
+    image: '/images/screens/acqua-san-pelegrino/rankings.png'
+  - label: 'Student roster'
+    image: '/images/screens/acqua-san-pelegrino/roster.png'
+  - label: 'Test windows'
+    image: '/images/screens/acqua-san-pelegrino/test-windows-list.png'
+  - label: 'Test window detail'
+    image: '/images/screens/acqua-san-pelegrino/test-window-detail.png'
+  - label: 'Attempt recording'
+    image: '/images/screens/acqua-san-pelegrino/test-attempt-recording.png'
+  - label: 'Settings'
+    image: '/images/screens/acqua-san-pelegrino/settings.png'
+order: 1
+---
+
+import HighlightCard from '../../components/case-study/HighlightCard.astro';
+import CodeSnippet from '../../components/case-study/CodeSnippet.astro';
+
+<HighlightCard title="Derived, not frozen, results">
+Official test results are computed live via a Postgres view that recalculates the best attempt per student/window/stroke on every read. Correcting a mistyped mark auto-corrects the official record — no manual "close the week" step, and the full raw-attempt history is preserved.
+</HighlightCard>
+
+<HighlightCard title="Multi-tenancy and RLS from day one">
+Every domain table carries an `academy_id`, enforced by `SECURITY DEFINER` helper functions (`auth_role()`, `auth_academy_id()`) — built for a resell-to-other-academies business model from the very first migration, not retrofitted later.
+</HighlightCard>
+
+<HighlightCard title="Three native build/runtime bugs diagnosed and patched">
+A Swift 6 concurrency compile error in `expo-modules-jsi`, a Health Connect permission bug from unreliable New-Architecture feature detection plus an alpha/stable SDK mismatch, and an uncatchable Objective-C exception inside a HealthKit method that silently crashed the app on real Apple Watch workouts — each patched with a documented root cause.
+</HighlightCard>
+
+<HighlightCard title="WhatsApp-safe passwordless auth">
+Two real production failures — WhatsApp's link-preview crawler burning single-use Supabase magic-link tokens, and browsers dropping URL fragments when launching custom URL schemes — solved via a public 302-redirect Edge Function that moves the token to a query string and defers verification until inside the app.
+</HighlightCard>
+
+<HighlightCard title="Onboarding that scaled with real usage">
+Iterated from coach-push invites to a student-initiated request/approve/claim flow to handle a ~250-student roster decoupled from auth accounts, including roster-matching suggestions and a constrained self-service data-correction RPC.
+</HighlightCard>
+
+<HighlightCard title="AI feedback with resilient failure isolation">
+Gemini-based swim workout feedback never rolls back the imported workout record on failure — retry logic and a tri-state status (`pending` / `ready` / `failed`) are tracked independently of the data write.
+</HighlightCard>
+
+<CodeSnippet
+  filename="official_results (view)"
+  lang="sql"
+  code={`create view official_results
+with (security_invoker = true) as
+select
+  a.student_id,
+  a.window_id,
+  a.stroke,
+  min(a.time_ms) filter (where t.best = 'lowest')  as best_time_ms,
+  max(a.distance_m) filter (where t.best = 'highest') as best_distance_m
+from attempts a
+join test_types t on t.id = a.test_type_id
+group by a.student_id, a.window_id, a.stroke;
+-- always recalculated on read — never frozen when a window closes`}
+/>

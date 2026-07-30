@@ -5,16 +5,21 @@ interface Props {
   tagline: string;
   platforms: { label: string; url?: string }[];
   stackTop: string[];
+  index?: number;
 }
 
-const { slug, title, tagline, platforms, stackTop } = Astro.props;
+const { slug, title, tagline, platforms, stackTop, index = 0 } = Astro.props;
 ---
 
-<a href={`/projects/${slug}`} class="card fade-in flex flex-col gap-4 p-6 transition-transform hover:-translate-y-1">
+<a
+  href={`/projects/${slug}`}
+  class="card hover-lift fade-in flex flex-col gap-4 p-6"
+  style={`--stagger-delay: ${index * 110}ms;`}
+>
   <div class="flex flex-wrap gap-2">
     {
       platforms.map((p) => (
-        <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
+        <span class="badge-hover rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
           {p.label}
         </span>
       ))
@@ -29,7 +34,7 @@ const { slug, title, tagline, platforms, stackTop } = Astro.props;
   <div class="flex flex-wrap gap-2 pt-1">
     {
       stackTop.map((s) => (
-        <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
+        <span class="badge-hover rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
           {s}
         </span>
       ))

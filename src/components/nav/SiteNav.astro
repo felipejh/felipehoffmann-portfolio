@@ -11,14 +11,14 @@ import { profile } from '../../data/profile';
       {profile.name}
     </a>
     <div class="flex items-center gap-5 text-sm" style="color: var(--text-muted);">
-      <a href="/#projects" class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Projects</a>
-      <a href="/#experience" class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Experience</a>
-      <a href={profile.resumeUrl} class="hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Resume</a>
-      <a href={`mailto:${profile.email}`} class="hover:opacity-100" style="opacity: 0.85;">Contact</a>
+      <a href="/#projects" class="nav-link hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Projects</a>
+      <a href="/#experience" class="nav-link hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Experience</a>
+      <a href={profile.resumeUrl} class="nav-link hidden sm:inline hover:opacity-100" style="opacity: 0.85;">Resume</a>
+      <a href={`mailto:${profile.email}`} class="nav-link hover:opacity-100" style="opacity: 0.85;">Contact</a>
       <button
         data-theme-toggle
         aria-label="Toggle theme"
-        class="grid h-8 w-8 place-items-center rounded-full border text-xs"
+        class="grid h-8 w-8 place-items-center rounded-full border text-xs transition-transform duration-200 hover:scale-110"
         style="border-color: var(--border); color: var(--text-muted);"
       >
         <span aria-hidden="true">◐</span>

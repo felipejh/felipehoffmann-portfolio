@@ -4,16 +4,17 @@ tagline: 'A full-stack, multi-tenant condominium management platform: REST API, 
 platforms:
   - label: 'Google Play'
     url: 'https://play.google.com/store/apps/details?id=br.com.centralcondo'
-  - label: 'App Store (TestFlight)'
+  - label: 'App Store'
+    url: 'https://apps.apple.com/br/app/central-condo/id6792112878?l=en-GB'
   - label: 'Web'
     url: 'https://www.altosdomoinho.com.br'
 timeframe: '2026 (built in ~1 month, 55 commits)'
-status: 'In active production use with a real pilot condo; Android live, iOS in App Store review'
+status: 'In active production use with a real pilot condo; live on Google Play and the App Store'
 role: 'Solo full-stack engineer — API, admin panel, mobile app, and infrastructure, end to end.'
 problem: 'Condominiums coordinate residents, packages, announcements, and maintenance requests over WhatsApp groups and paper logs at the front desk — no shared source of truth for managers or residents, and no way to serve more than one building from the same system.'
 impact:
   - 'In active production use with Altos do Moinho, a real pilot condo, at altosdomoinho.com.br.'
-  - 'Mobile app already past App Store/Play submission — Android live, iOS on TestFlight.'
+  - 'Mobile app live on both Google Play and the App Store.'
   - 'Same API and mobile app serve multiple condominiums from a single codebase.'
   - 'CI runs real integration tests against a live Postgres container on every server change.'
 stack:

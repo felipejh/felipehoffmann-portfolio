@@ -6,8 +6,8 @@ import { otherWork } from '../../data/other-work';
   <h2 class="eyebrow">Other Work</h2>
   <div class="grid gap-4 sm:grid-cols-2">
     {
-      otherWork.map((item) => (
-        <div class="rounded-lg border p-4" style="border-color: var(--border);">
+      otherWork.map((item, i) => (
+        <div class="hover-lift rounded-lg border p-4" style={`border-color: var(--border); transition-delay: ${i * 90}ms;`}>
           <div class="mb-1 flex items-baseline justify-between gap-2">
             <h3 class="text-sm font-semibold" style="font-family: inherit; color: var(--text);">
               {item.name}

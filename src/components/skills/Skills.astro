@@ -6,10 +6,10 @@ import { skillGroups } from '../../data/skills';
   <h2 class="eyebrow">Skills</h2>
   <div class="grid gap-5 sm:grid-cols-2">
     {
-      skillGroups.map((group) => (
+      skillGroups.map((group, i) => (
         <div
-          class="card p-5"
-          style={group.featured ? `border-color: var(--accent); background: var(--accent-soft);` : ''}
+          class="card hover-lift fade-in p-5"
+          style={`transition-delay: ${i * 90}ms; --stagger-delay: ${i * 90}ms; ${group.featured ? 'border-color: var(--accent); background: var(--accent-soft);' : ''}`}
         >
           <h3
             class="mb-3 text-sm font-semibold"
@@ -20,7 +20,7 @@ import { skillGroups } from '../../data/skills';
           <div class="flex flex-wrap gap-2">
             {group.items.map((item) => (
               <span
-                class="rounded-full border px-3 py-1 text-xs"
+                class="badge-hover rounded-full border px-3 py-1 text-xs"
                 style="border-color: var(--border); color: var(--text-muted);"
               >
                 {item}

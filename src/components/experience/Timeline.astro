@@ -6,8 +6,8 @@ import { experience, education } from '../../data/experience';
   <h2 class="eyebrow">Experience</h2>
   <div class="flex flex-col gap-5">
     {
-      experience.map((job) => (
-        <div class="card p-6">
+      experience.map((job, i) => (
+        <div class="card hover-lift fade-in p-6" style={`--stagger-delay: ${i * 90}ms;`}>
           <div class="mb-3 flex flex-wrap items-baseline justify-between gap-2">
             <div>
               <h3 class="text-base font-semibold" style="font-family: inherit; color: var(--text);">
@@ -33,7 +33,7 @@ import { experience, education } from '../../data/experience';
 
   <div class="mt-10">
     <h3 class="mb-3 text-xs font-semibold uppercase tracking-widest" style="color: var(--text-muted);">Education</h3>
-    <div class="card flex flex-wrap items-baseline justify-between gap-2 p-5">
+    <div class="card hover-lift flex flex-wrap items-baseline justify-between gap-2 p-5">
       <div>
         <p class="text-sm font-semibold" style="font-family: inherit; color: var(--text);">{education.degree}</p>
         <p class="text-sm" style="color: var(--text-muted);">{education.school}</p>

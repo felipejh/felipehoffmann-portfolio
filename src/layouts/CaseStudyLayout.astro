@@ -35,14 +35,18 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
                 href={p.url}
                 target="_blank"
                 rel="noreferrer"
-                class="rounded-full px-2.5 py-1 text-xs font-semibold underline-offset-2 hover:underline"
+                class="badge-hover rounded-full px-2.5 py-1 text-xs font-semibold underline-offset-2 hover:underline"
                 style="background: var(--accent); color: #05070c;"
               >
                 {p.label} ↗
               </a>
             ) : (
-              <span class="rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
-                {p.label}
+              <span
+                class="coming-soon rounded-full border border-dashed px-2.5 py-1 text-xs font-medium"
+                style="border-color: var(--text-muted); color: var(--text-muted);"
+                title="Not publicly available yet"
+              >
+                {p.label} · soon
               </span>
             ),
           )
@@ -76,7 +80,7 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
 
     <section>
       <h2 class="eyebrow">Architecture &amp; Engineering Highlights</h2>
-      <div class="prose-case-study grid gap-4 sm:grid-cols-2">
+      <div class="prose-case-study stagger-children grid gap-4 sm:grid-cols-2">
         <slot />
       </div>
     </section>

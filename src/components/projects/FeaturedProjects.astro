@@ -9,12 +9,13 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   <h2 class="eyebrow">Featured Projects</h2>
   <div class="grid gap-5 sm:grid-cols-2">
     {
-      projects.map((project) => (
+      projects.map((project, i) => (
         <ProjectCard
           slug={project.id}
           title={project.data.title}
           tagline={project.data.tagline}
           platforms={project.data.platforms}
+          index={i}
           stackTop={[
             ...project.data.stack.frontend.slice(0, 2),
             ...project.data.stack.backend.slice(0, 1),

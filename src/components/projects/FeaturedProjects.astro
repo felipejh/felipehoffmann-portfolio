@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard.astro';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<section id="projects" class="container section-divider fade-in py-16 sm:py-20">
+<section id="projects" class="container section-divider fade-in py-10 sm:py-14">
   <h2 class="eyebrow">Featured Projects</h2>
   <div class="grid gap-5 sm:grid-cols-2">
     {

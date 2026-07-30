@@ -5,7 +5,7 @@ const year = new Date().getFullYear();
 
 <footer class="border-t" style="border-color: var(--border);">
   <div class="container flex flex-col items-center gap-3 py-10 text-center text-sm sm:flex-row sm:justify-between sm:text-left" style="color: var(--text-muted);">
-    <p>&copy; {year} {profile.name}. Built with Claude Code.</p>
+    <p>&copy; {year} {profile.name}</p>
     <div class="flex items-center gap-4">
       <a href={`mailto:${profile.email}`} class="hover:opacity-100" style="opacity: 0.85;">{profile.email}</a>
       <a href={profile.linkedin} target="_blank" rel="noreferrer" class="hover:opacity-100" style="opacity: 0.85;">

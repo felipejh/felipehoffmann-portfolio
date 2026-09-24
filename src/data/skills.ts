@@ -11,6 +11,10 @@ export const skillGroups: SkillGroup[] = [
     items: ['Claude Code', 'GitHub Copilot', 'AI Agent Orchestration', 'MCP', 'Jira/Figma integrations'],
   },
   {
+    label: 'Machine Learning',
+    items: ['Custom model training', 'On-device computer vision (real-time vehicle damage classification)'],
+  },
+  {
     label: 'Mobile & Frontend',
     items: [
       'React Native',

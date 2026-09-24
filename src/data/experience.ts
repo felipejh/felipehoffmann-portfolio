@@ -13,11 +13,13 @@ export const experience: ExperienceEntry[] = [
     location: 'Mississauga, ON, Canada',
     dates: 'Nov 2023 – Current',
     bullets: [
-      'Sole mobile engineer for 3 production React Native apps used daily by 10+ staff; eliminated the recurring bug backlog down to zero reported bugs.',
-      'Built camera-based vehicle damage documentation using Vision Camera and Reanimated.',
-      'Built real-time test-drive scheduling via WebSockets.',
-      'Restructured the team workflow around AI-agent orchestration (Claude Code, custom MCP servers), cutting multi-day features down to hours.',
-      'Owns the full deployment pipeline: GitHub Actions, Fastlane, Expo EAS.',
+      'Sole mobile engineer across 3 React Native apps: maintaining and improving an existing app in daily use by 10+ internal staff, taking a new app through to app store release, and currently leading a ground-up rebuild of a third.',
+      'Chose a Turborepo-based monorepo architecture for the ground-up rebuild, improving code sharing and build performance from day one.',
+      'Eliminated recurring bug complaints by taking full ownership of app stability and resolving a long-standing backlog of issues, turning a reputation for instability into zero reported bugs.',
+      'Trained and integrated a custom ML model for real-time vehicle damage recognition, classifying damage type instantly from the phone camera feed, using Vision Camera and Reanimated for a smooth, low-latency experience.',
+      'Engineered a real-time vehicle test-drive scheduling flow using WebSockets, ensuring instant availability updates and eliminating booking conflicts.',
+      'Restructured personal workflow around AI-agent orchestration (Claude Code, MCP integrations with Jira and Figma), dramatically speeding up feature implementation and enabling a single engineer to fully own architecture, delivery, and maintenance across 3 production apps.',
+      'Managed the full deployment pipeline (GitHub Actions, Fastlane, Expo EAS) for both stores, including signing and alpha/beta testing groups.',
     ],
   },
   {
@@ -40,6 +42,15 @@ export const experience: ExperienceEntry[] = [
       'Proposed and delivered the migration of push notifications from a hybrid Angular app to React Native, serving 5,000+ users.',
       'Reduced purchase-order approval turnaround time.',
       'Delivered mobile (Java) and backend (PL/SQL) ERP features.',
+    ],
+  },
+  {
+    company: 'Freelance Technician',
+    role: 'Independent PC Maintenance Technician',
+    location: 'Caxias do Sul, Brazil (Self-employed)',
+    dates: '2010 – 2017',
+    bullets: [
+      'Provided freelance computer hardware and software maintenance services locally, while completing my degree and beginning self-directed study in software development.',
     ],
   },
 ];

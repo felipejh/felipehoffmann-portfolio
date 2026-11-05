@@ -6,43 +6,64 @@ export interface SkillGroup {
 
 export const skillGroups: SkillGroup[] = [
   {
-    label: 'AI-Assisted Development',
+    label: "Mobile Frameworks & State Management",
     featured: true,
-    items: ['Claude Code', 'GitHub Copilot', 'AI Agent Orchestration', 'MCP', 'Jira/Figma integrations'],
-  },
-  {
-    label: 'Machine Learning',
-    items: ['Custom model training', 'On-device computer vision (real-time vehicle damage classification)'],
-  },
-  {
-    label: 'Mobile & Frontend',
     items: [
-      'React Native',
-      'Redux',
-      'Context API',
-      'Expo',
-      'Vision Camera',
-      'Reanimated',
-      'RealmDB',
-      'SQLite',
-      'Swift',
-      'Java',
-      'PL/SQL',
+      "React Native",
+      "Expo",
+      "Expo Router",
+      "Redux",
+      "Context API",
+      "TanStack Query",
     ],
   },
   {
-    label: 'Product Engineering',
+    label: "Mobile Development",
     items: [
-      'In-App Purchases & Subscriptions',
-      'Push Notifications',
-      'Deep Linking',
-      'Animations',
-      'Gesture Handling',
-      'Expo Router',
+      "Vision Camera",
+      "Reanimated",
+      "Gesture Handling",
+      "Animations",
+      "In-App Purchases & Subscriptions",
+      "Push Notifications",
+      "Deep Linking",
     ],
   },
   {
-    label: 'Delivery & Release',
-    items: ['GitHub Actions', 'Fastlane', 'Expo EAS', 'AppCenter', 'App Store & Google Play release management'],
+    label: "Languages",
+    items: ["JavaScript", "TypeScript", "Swift", "Java", "PL/SQL"],
+  },
+  {
+    label: "Web & Backend",
+    items: ["React", "Node.js/Fastify", "REST APIs", "WebSockets"],
+  },
+  {
+    label: "Databases",
+    items: ["PostgreSQL", "Supabase", "RealmDB", "SQLite"],
+  },
+  {
+    label: "Testing",
+    items: ["Jest", "Testing Library", "Cypress"],
+  },
+  {
+    label: "AI-Assisted Development",
+    items: [
+      "Claude Code (daily)",
+      "AI agent orchestration",
+      "Model Context Protocol (MCP)",
+      "Spec-driven workflow",
+      "Jira and Figma integrations",
+      "Image classification proof of concept (Create ML)",
+    ],
+  },
+  {
+    label: "Cloud/DevOps & Release Management",
+    items: [
+      "GitHub Actions",
+      "Fastlane",
+      "Expo EAS",
+      "AppCenter",
+      "App Store and Google Play release management",
+    ],
   },
 ];

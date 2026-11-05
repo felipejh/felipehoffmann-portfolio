@@ -21,11 +21,13 @@ import { experience, education } from '../../data/experience';
               {job.dates}
             </span>
           </div>
-          <ul class="flex flex-col gap-1.5 pl-4 text-sm leading-relaxed" style="color: var(--text-muted); list-style: disc;">
-            {job.bullets.map((b) => (
-              <li>{b}</li>
-            ))}
-          </ul>
+          {job.bullets.length > 0 && (
+            <ul class="flex flex-col gap-1.5 pl-4 text-sm leading-relaxed" style="color: var(--text-muted); list-style: disc;">
+              {job.bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          )}
         </div>
       ))
     }

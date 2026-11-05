@@ -12,6 +12,7 @@ const projects = defineCollection({
     role: z.string(),
     problem: z.string(),
     impact: z.array(z.string()),
+    cardStack: z.array(z.string()),
     stack: z.object({
       frontend: z.array(z.string()),
       backend: z.array(z.string()),

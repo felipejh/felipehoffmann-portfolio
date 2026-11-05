@@ -16,10 +16,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
           tagline={project.data.tagline}
           platforms={project.data.platforms}
           index={i}
-          stackTop={[
-            ...project.data.stack.frontend.slice(0, 2),
-            ...project.data.stack.backend.slice(0, 1),
-          ]}
+          stackTop={project.data.cardStack}
         />
       ))
     }

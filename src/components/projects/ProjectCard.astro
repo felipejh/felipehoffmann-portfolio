@@ -1,4 +1,6 @@
 ---
+import StoreButtons from './StoreButtons.astro';
+
 interface Props {
   slug: string;
   title: string;
@@ -11,22 +13,14 @@ interface Props {
 const { slug, title, tagline, platforms, stackTop, index = 0 } = Astro.props;
 ---
 
-<a
-  href={`/projects/${slug}`}
-  class="card hover-lift fade-in flex flex-col gap-4 p-6"
+<div
+  class="card hover-lift fade-in relative flex flex-col gap-4 p-6"
   style={`--stagger-delay: ${index * 110}ms;`}
 >
-  <div class="flex flex-wrap gap-2">
-    {
-      platforms.map((p) => (
-        <span class="badge-hover rounded-full px-2.5 py-1 text-xs font-medium" style="background: var(--accent-soft); color: var(--accent);">
-          {p.label}
-        </span>
-      ))
-    }
-  </div>
   <h3 class="text-xl font-semibold" style="font-family: inherit; color: var(--text);">
-    {title}
+    <a href={`/projects/${slug}`} class="after:absolute after:inset-0 after:content-['']">
+      {title}
+    </a>
   </h3>
   <p class="text-sm leading-relaxed" style="color: var(--text-muted);">
     {tagline}
@@ -34,11 +28,14 @@ const { slug, title, tagline, platforms, stackTop, index = 0 } = Astro.props;
   <div class="flex flex-wrap gap-2 pt-1">
     {
       stackTop.map((s) => (
-        <span class="badge-hover rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
+        <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
           {s}
         </span>
       ))
     }
   </div>
-  <span class="mt-auto pt-2 text-sm font-medium" style="color: var(--accent);">View full case study →</span>
-</a>
+  <div class="mt-auto flex flex-col items-start gap-3 pt-2">
+    <StoreButtons platforms={platforms} size="sm" class="relative z-10" />
+    <span class="text-sm font-medium" style="color: var(--accent);">View full case study →</span>
+  </div>
+</div>

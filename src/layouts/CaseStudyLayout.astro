@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import TechStackBadges from '../components/case-study/TechStackBadges.astro';
 import ScreensGallery from '../components/case-study/ScreensGallery.astro';
+import StoreButtons from '../components/projects/StoreButtons.astro';
 
 interface Props {
   title: string;
@@ -28,29 +29,6 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
     <header class="flex flex-col gap-4">
       <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>
       <div class="flex flex-wrap gap-2">
-        {
-          platforms.map((p) =>
-            p.url ? (
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                class="badge-hover rounded-full px-2.5 py-1 text-xs font-semibold underline-offset-2 hover:underline"
-                style="background: var(--accent); color: #05070c;"
-              >
-                {p.label} ↗
-              </a>
-            ) : (
-              <span
-                class="coming-soon rounded-full border border-dashed px-2.5 py-1 text-xs font-medium"
-                style="border-color: var(--text-muted); color: var(--text-muted);"
-                title="Not publicly available yet"
-              >
-                {p.label} · soon
-              </span>
-            ),
-          )
-        }
         <span class="rounded-full border px-2.5 py-1 text-xs" style="border-color: var(--border); color: var(--text-muted);">
           {timeframe}
         </span>
@@ -60,6 +38,7 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
       </div>
       <h1 class="text-3xl font-bold sm:text-5xl" style="color: var(--text);">{title}</h1>
       <p class="max-w-2xl text-lg" style="color: var(--text-muted);">{tagline}</p>
+      <StoreButtons platforms={platforms} class="pt-2" />
     </header>
 
     <section class="grid gap-8 sm:grid-cols-3">
@@ -95,6 +74,7 @@ const { title, tagline, platforms, timeframe, status, role, problem, impact, sta
       <ul class="flex flex-col gap-1.5 pl-4 text-sm leading-relaxed" style="color: var(--text-muted); list-style: disc;">
         {impact.map((line) => <li>{line}</li>)}
       </ul>
+      <StoreButtons platforms={platforms} class="pt-6" />
     </section>
 
     <a href="/#projects" class="text-sm" style="color: var(--accent);">← Back to projects</a>

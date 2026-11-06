@@ -4,9 +4,18 @@ import { profile } from '../../data/profile';
 
 <section class="container grid items-center gap-10 pb-14 pt-20 sm:pb-16 sm:pt-28 lg:grid-cols-[1.2fr_auto]">
   <div class="flex flex-col gap-6">
-    <p class="fade-in text-sm font-mono" style="color: var(--accent);">
-      {profile.location} · {profile.timezone}
-    </p>
+    <div class="fade-in flex flex-wrap items-center gap-x-4 gap-y-2">
+      <p class="text-sm font-mono" style="color: var(--accent);">
+        {profile.location} · {profile.timezone}
+      </p>
+      <span
+        class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium"
+        style="border-color: var(--border); color: var(--text);"
+      >
+        <span class="open-dot" aria-hidden="true"></span>
+        Open to remote roles
+      </span>
+    </div>
     <h1 class="fade-in text-4xl font-bold sm:text-6xl" style="color: var(--text);">
       {profile.name}
     </h1>
@@ -16,11 +25,21 @@ import { profile } from '../../data/profile';
     <p class="fade-in max-w-2xl text-base leading-relaxed sm:text-lg" style="color: var(--text-muted);">
       {profile.tagline}
     </p>
+    <ul class="fade-in flex flex-wrap gap-x-2 gap-y-1 text-sm font-medium" style="color: var(--text);">
+      {
+        profile.highlights.map((h, i) => (
+          <li class="flex items-center gap-2">
+            {i > 0 && <span aria-hidden="true" style="color: var(--text-muted);">·</span>}
+            {h}
+          </li>
+        ))
+      }
+    </ul>
     <div class="fade-in flex flex-wrap gap-3 pt-2">
       <a
         href={profile.resumeUrl}
         class="badge-hover rounded-full px-5 py-2.5 text-sm font-medium"
-        style="background: var(--accent); color: #05070c;"
+        style="background: var(--accent); color: var(--on-accent);"
       >
         View Resume
       </a>
@@ -45,31 +64,33 @@ import { profile } from '../../data/profile';
 
   <div class="hero-phone-wrap fade-in hidden justify-self-center lg:block" style="--stagger-delay: 200ms;">
     <div class="hero-phone-float">
-      <div id="hero-phone" class="w-56 overflow-hidden rounded-[2rem] border-4 shadow-2xl" style="border-color: #2a2f3a; background: #0d1017; transition: transform 0.15s ease-out;">
-        <div class="flex items-center justify-between px-4 pb-2 pt-3 text-[10px]" style="color: #6b7280;">
-          <span>9:41</span>
-          <span>●●●</span>
-        </div>
-        <div class="flex flex-col gap-3 px-3 pb-5">
-          <div class="h-3 w-20 rounded-full" style="background: var(--accent);"></div>
-          <div class="rounded-xl p-3" style="background: var(--accent-soft);">
-            <div class="mb-2 h-2 w-16 rounded-full" style="background: var(--accent);"></div>
-            <div class="flex items-end gap-1.5">
-              {[10, 18, 13, 22, 16, 24, 19].map((h) => (
-                <span class="w-2 rounded-t-sm" style={`height: ${h}px; background: var(--accent);`} />
-              ))}
-            </div>
-          </div>
-          <div class="rounded-xl border p-3" style="border-color: #232833;">
-            <div class="mb-1.5 h-2 w-24 rounded-full" style="background: #3a4150;"></div>
-            <div class="h-2 w-14 rounded-full" style="background: #262c38;"></div>
-          </div>
-          <div class="rounded-xl border p-3" style="border-color: #232833;">
-            <div class="mb-1.5 h-2 w-20 rounded-full" style="background: #3a4150;"></div>
-            <div class="h-2 w-10 rounded-full" style="background: #262c38;"></div>
-          </div>
-          <div class="mt-1 h-9 rounded-full" style="background: var(--accent);"></div>
-        </div>
+      <div id="hero-phone" class="relative h-[480px] w-[340px]" style="transition: transform 0.15s ease-out;">
+        <a
+          href="/projects/central-condo"
+          class="hero-device absolute right-0 top-0 w-48 rotate-6"
+          aria-label="Central Condo case study"
+        >
+          <img
+            src="/images/screens/central-condo/mobile-resident-home.png"
+            alt="Central Condo resident home screen"
+            width="362"
+            height="787"
+            class="block h-auto w-full"
+          />
+        </a>
+        <a
+          href="/projects/acqua-san-pelegrino"
+          class="hero-device absolute bottom-0 left-0 z-10 w-52 -rotate-3"
+          aria-label="Acqua San Pelegrino case study"
+        >
+          <img
+            src="/images/screens/acqua-san-pelegrino/student-home.png"
+            alt="Acqua San Pelegrino student home screen"
+            width="1206"
+            height="2622"
+            class="block h-auto w-full"
+          />
+        </a>
       </div>
     </div>
   </div>
